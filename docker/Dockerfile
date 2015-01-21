@@ -1,6 +1,11 @@
 FROM centos:centos6
-MAINTAINER Paulson McIntyre, <paul+docker.rfwadmin@gpmidi.net>
-
+MAINTAINER Michael Parker, <parkervcp@gmail.com>
+###
+#
+# Originally by Paulson McIntyre, <paul+docker.rfwadmin@gpmidi.net>
+# Modified to work with tmux... Hopefully
+#
+###
 
 ##### Enviorement S&C #####
 # Sane umask
@@ -22,10 +27,11 @@ ENV MC_USE_SAFEOFF 0
 ##### Actual Work #####
 # Do an initial update
 RUN yum -y update \
-  && yum install -y epel-release
 
 # Fix local errors when logging in
-RUN yum -y reinstall glibc-common
+RUN   yum -y install epel-release \
+      && yum -y update \
+      &&yum -y reinstall glibc-common
 
 RUN yum -y install vim-enhanced wget zip unzip lsof \
   git python-devel tmux java-1.7.0-openjdk php httpd php-curl
@@ -36,13 +42,9 @@ RUN  chkconfig httpd on \
   && echo "date.timezone = GMT" > /etc/php.d/timezone.ini \
   && sed -i 's/upload_max_filesize = [0-9]\{1,8\}M/upload_max_filesize = 512M/' /etc/php.ini
 
-# Setup screen
-RUN  chmod 777 /var/run/screen \
-  && chown root:root /var/run/screen
-
 # Get RFW Admin
 RUN  cd /root/ \
-  && git clone https://github.com/gpmidi/rfwadmin.git
+  && git clone https://github.com/parkervcp/rfwadmin.git
 
 RUN  service httpd start \
   && sleep 5 \
@@ -54,7 +56,7 @@ RUN  mkdir -p /var/lib/minecraft/servers/default/server.stock/ \
   && rm -Rf /var/lib/minecraft/servers/default/server/{logs,world} \
   && mkdir -p /var/lib/minecraft/servers/default/server/{logs,world} \
   && echo "" > /var/lib/minecraft/servers/default/server/logs/latest.log \
-  && echo "" > /var/lib/minecraft/servers/default/screen.log \
+  && echo "" > /var/lib/minecraft/servers/default/tmux.log \
   && chown -R apache:apache /var/lib/minecraft/servers/default/server/ \
   && chmod -R 644 /var/lib/minecraft/servers/default/server \
   && chmod 755 /var/lib/minecraft/servers/default/server/ /var/lib/minecraft/servers/default/server/{logs,world} \
