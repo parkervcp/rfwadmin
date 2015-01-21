@@ -5,10 +5,6 @@ echo "Starting at "`/bin/date`
 
 cd /var/lib/minecraft/
 
-# Set screen dir perms if they aren't already set
-/bin/chmod 777 /var/run/screen
-/bin/chown root:root /var/run/screen
-
 
 # Pre-download latest MC server
 LATEST_SERVER_VERSION=`wget --quiet -O - https://s3.amazonaws.com/Minecraft.Download/versions/versions.json |grep '"release": ' |sed  's/^ \+"release": "\(.\+\)".\+$/\1/'`
