@@ -4,11 +4,15 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title><?php echo e($mc->html_title); ?></title>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/darkly/bootstrap.min.css" />
+    <link rel="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="rfwadmin_files/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="rfwadmin_files/favicon.ico">
     <script type="text/javascript" src="rfwadmin_files/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="rfwadmin_files/jquery.autosize.js"></script>
     <script type="text/javascript" src="rfwadmin_files/jquery.escape.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" />
     <script type="text/javascript" src="rfwadmin_files/main.js"></script>
     <script type="text/javascript" src="rfwadmin_files/log.js"></script>
 <?php if ($mc->armory_enabled) { ?>
