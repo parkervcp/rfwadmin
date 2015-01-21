@@ -21,13 +21,14 @@ ENV MC_USE_SAFEOFF 0
 
 ##### Actual Work #####
 # Do an initial update
-RUN yum -y update
+RUN yum -y update \
+  && yum install -y epel-release
 
 # Fix local errors when logging in
 RUN yum -y reinstall glibc-common
 
 RUN yum -y install vim-enhanced wget zip unzip lsof \
-  git python-devel screen java-1.7.0-openjdk php httpd php-curl
+  git python-devel tmux java-1.7.0-openjdk php httpd php-curl
 
 # Setup apache
 RUN  chkconfig httpd on \
